@@ -3,36 +3,32 @@
 __author__ = "730767580"
 
 
-def main_planner(guests: int):
+def main_planner(guests: int) -> None:
     """Display all the relevant information for the party"""
     print(f"A Cozy Tea Party for {guests} People!")
     # Getting the parameter values by calling defined functions
-    tea_count = tea_bags(guests)
-    treat_count = treats(guests)
-    print(f"Tea Bags: {tea_count}")
-    print(f"Treats: {treat_count}")
-    print(f"Cost: ${cost(tea_count, treat_count)}")
+    print(f"Tea Bags: {tea_bags(guests)}")
+    print(f"Treats: {treats(guests)}")
+    print(f"Cost: ${cost(tea_bags(guests), treats(guests))}")
+    return None
 
 
 def tea_bags(people: int) -> int:
     """Calculate the amount of tea bags that will be used"""
     # Two tea bags per person
-    tea_count = people * 2
-    return tea_count
+    return people * 2
 
 
 def treats(people: int) -> int:
     """Calculate the amount of treats that will be eaten"""
     # Essentially 3 treats per person
-    treat_count = int(tea_bags(people) * 1.5)
-    return treat_count
+    return int(tea_bags(people=people) * 1.5)
 
 
 def cost(tea_count: int, treat_count: int) -> float:
     # Essentially $3.25 per person
     """Calculate the cost of the tea party"""
-    total = (tea_count * 0.5) + (treat_count * 0.75)
-    return total
+    return (tea_count * 0.5) + (treat_count * 0.75)
 
 
 if __name__ == "__main__":
