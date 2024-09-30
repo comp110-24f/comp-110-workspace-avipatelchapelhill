@@ -33,8 +33,8 @@ def contains_char(secret_word: str, char_guess: str) -> bool:
 """Represent the accuracy of the guess in terms of emojis"""
 
 
-def emojified(guess: str, secret: str) -> str:
-    assert len(guess) == len(
+def emojified(guess_input: str, secret: str) -> str:
+    assert len(guess_input) == len(
         secret
     )  # Will raise an error if the length of the guess and secret word don't match
     white: str = "\U00002B1C"  # white unicode for emoji block
@@ -45,17 +45,17 @@ def emojified(guess: str, secret: str) -> str:
     while i < len(secret):
         if (
             contains_char(
-                secret_word=secret, char_guess=guess[i]
+                secret_word=secret, char_guess=guess_input[i]
             )  # character correct and in correct position
-            and guess[i] == secret[i]
+            and guess_input[i] == secret[i]
         ):
             emojis += green
             i += 1
         elif (
             contains_char(
-                secret_word=secret, char_guess=guess[i]
+                secret_word=secret, char_guess=guess_input[i]
             )  # character correct but wrong position
-            and guess[i] != secret[i]
+            and guess_input[i] != secret[i]
         ):
             emojis += yellow
             i += 1
@@ -77,8 +77,8 @@ def main(secret: str) -> None:
     ):  # While loop to keep track of how many turns remain for the user to guess
         print(f"=== Turn {i}/6 ===")
         guess = input_guess(secret_word_len=len(secret))
-        print(emojified(guess=guess, secret=secret))
-        if emojified(guess=guess, secret=secret) == (green * len(secret)):
+        print(emojified(guess_input=guess, secret=secret))
+        if emojified(guess_input=guess, secret=secret) == (green * len(secret)):
             print(f"You won in {i}/6 turns!")
             return None
         else:
