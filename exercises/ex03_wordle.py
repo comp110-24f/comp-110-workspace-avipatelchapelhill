@@ -6,12 +6,12 @@ __author__ = "730767580"
 
 
 def input_guess(secret_word_len: int) -> str:
-    guess: str = input(f"Enter a {secret_word_len} character word: ")
+    guess_input: str = input(f"Enter a {secret_word_len} character word: ")
     while (
-        len(guess) != secret_word_len
+        len(guess_input) != secret_word_len
     ):  # if the lengths don't match continue asking for a valid guess
-        guess: str = input(f"That wasn't {secret_word_len} chars! Try Again: ")
-    return guess
+        guess_input: str = input(f"That wasn't {secret_word_len} chars! Try Again: ")
+    return guess_input
 
 
 """Checks to see if a character is anywhere in the secret word"""
@@ -33,8 +33,8 @@ def contains_char(secret_word: str, char_guess: str) -> bool:
 """Represent the accuracy of the guess in terms of emojis"""
 
 
-def emojified(guess_input: str, secret: str) -> str:
-    assert len(guess_input) == len(
+def emojified(guess_made: str, secret: str) -> str:
+    assert len(guess_made) == len(
         secret
     )  # Will raise an error if the length of the guess and secret word don't match
     white: str = "\U00002B1C"  # white unicode for emoji block
@@ -45,17 +45,17 @@ def emojified(guess_input: str, secret: str) -> str:
     while i < len(secret):
         if (
             contains_char(
-                secret_word=secret, char_guess=guess_input[i]
+                secret_word=secret, char_guess=guess_made[i]
             )  # character correct and in correct position
-            and guess_input[i] == secret[i]
+            and guess_made[i] == secret[i]
         ):
             emojis += green
             i += 1
         elif (
             contains_char(
-                secret_word=secret, char_guess=guess_input[i]
+                secret_word=secret, char_guess=guess_made[i]
             )  # character correct but wrong position
-            and guess_input[i] != secret[i]
+            and guess_made[i] != secret[i]
         ):
             emojis += yellow
             i += 1
@@ -76,9 +76,9 @@ def main(secret: str) -> None:
         i <= 6
     ):  # While loop to keep track of how many turns remain for the user to guess
         print(f"=== Turn {i}/6 ===")
-        guess = input_guess(secret_word_len=len(secret))
-        print(emojified(guess_input=guess, secret=secret))
-        if emojified(guess_input=guess, secret=secret) == (green * len(secret)):
+        user_guess = input_guess(secret_word_len=len(secret))
+        print(emojified(guess_made=user_guess, secret=secret))
+        if emojified(guess_made=user_guess, secret=secret) == (green * len(secret)):
             print(f"You won in {i}/6 turns!")
             return None
         else:
@@ -89,4 +89,4 @@ def main(secret: str) -> None:
 
 """Allows the code to run as a module"""
 if __name__ == "__main__":
-    main(secret="codess")
+    main(secret="codes")
