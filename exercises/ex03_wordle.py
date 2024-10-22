@@ -10,7 +10,7 @@ def input_guess(secret_word_len: int) -> str:
     while (
         len(guess_input) != secret_word_len
     ):  # if the lengths don't match continue asking for a valid guess
-        guess_input: str = input(f"That wasn't {secret_word_len} chars! Try Again: ")
+        guess_input = input(f"That wasn't {secret_word_len} chars! Try Again: ")
     return guess_input
 
 
