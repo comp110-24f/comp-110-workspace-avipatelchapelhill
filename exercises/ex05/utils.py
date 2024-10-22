@@ -32,7 +32,7 @@ def sub(vals: list[int], start: int, end: int) -> list[int]:
 
 
 def add_at_index(vals: list[int], element: int, index: int) -> None:
-    if index > len(vals):
+    if index > len(vals) or index < 0:
         raise IndexError(
             "Index is out of bounds for the input list"
         )  # raises an error if index is greater than the length of the list
