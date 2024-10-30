@@ -22,7 +22,7 @@ def invert(input_dict: dict[str, str]) -> dict[str, str]:
 
 def favorite_color(color_dict: dict[str, str]) -> str:
     # Collect the color frequencies
-    frequency = {}
+    frequency: dict[str, int] = {}
     for name in color_dict:
         color = color_dict[name]
         if color in frequency:
@@ -44,13 +44,28 @@ def favorite_color(color_dict: dict[str, str]) -> str:
 
 
 def count(values: list[str]) -> dict[str, int]:
-    result = {}
+    result: dict[str, int] = {}
     for item in values:
         # Check if the item is already in the dictionary
         if item in result:
             result[item] += 1
         else:
             result[item] = 1
+    return result
+
+
+"""Create a dictionary of letters that match the starting letters of words"""
+
+
+def alphabetizer(words: list[str]) -> dict[str, list[str]]:
+    result: dict[str, list[str]] = {}
+    for word in words:
+        first_letter = word[0].lower()  # Convert to lowercase
+        if first_letter in result:
+            result[first_letter].append(word)
+        else:
+            # create a new list with the current word
+            result[first_letter] = [word]
     return result
 
 
@@ -66,3 +81,4 @@ def update_attendance(
     else:
         # add the day with the student in a new list
         attendance_dict[day] = [student]
+    return None
